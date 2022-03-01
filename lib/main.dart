@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shatek/constants.dart';
 import 'package:shatek/services/auth/authentication_service.dart';
-import 'package:shatek/screens/homeScreen.dart';
+import 'package:shatek/screens/home/home_screen.dart';
 import 'package:shatek/screens/auth/loginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,18 +29,19 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'Plant App',
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
+          scaffoldBackgroundColor: kBackgroundColor,
+          primaryColor: kPrimaryColor,
+          textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         // home: AuthenticationWrapper(),
         home: Scaffold(
           body: AuthenticationWrapper(),
-          appBar: AppBar(
-            title: Text('Shatek'),
-          ),
         ),
+        // home: HomeScreen(),
       ),
     );
   }
@@ -52,7 +54,7 @@ class AuthenticationWrapper extends StatelessWidget {
 
     // ignore: unnecessary_null_comparison
     if (firebaseUser != null) {
-      return HomePage();
+      return HomeScreen();
     }
     return SignInPage();
   }
